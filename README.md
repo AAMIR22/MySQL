@@ -3,7 +3,7 @@ This repository contains SQL scripts
 
 # 01-DDL Commands SchoolDatabase
 
-This project demonstrates various Data Definition Language (DDL) commands such as CREATE, ALTER, DROP, RENAME, and TRUNCATE on a database named `School`. The operations are performed on a table named `STUDENT` with the following fields:
+This project demonstrates various Data Definition Language (DDL) commands such as CREATE, ALTER, DROP, RENAME, and TRUNCATE on a database named `School`. The operations are performed on a table named `STUDENTS` with the following fields:
 - `Roll_No`
 - `Name`
 - `Marks`
@@ -31,7 +31,7 @@ This project demonstrates various Data Definition Language (DDL) commands such a
 
 2. **Create Table**:
    ```sql
-   CREATE TABLE STUDENT (
+   CREATE TABLE STUDENTS (
        Roll_No INT PRIMARY KEY,
        Name VARCHAR(50),
        Marks INT,
@@ -42,32 +42,32 @@ This project demonstrates various Data Definition Language (DDL) commands such a
 ## Executing Commands
 
 ### Create Table
-Initially, create the table `STUDENT` with the columns `Roll_No`, `Name`, `Marks`, and `Grade`.
+Initially, create the table `STUDENTS` with the columns `Roll_No`, `Name`, `Marks`, and `Grade`.
 
 ### Select Command
-Insert data into the `STUDENT` table and display the table using the SELECT command:
+Insert data into the `STUDENTS` table and display the table using the SELECT command:
    ```sql
-   INSERT INTO STUDENT (Roll_No, Name, Marks, Grade) VALUES (1, 'John Doe', 85, 'A'), (2, 'Jane Smith', 90, 'A'), (3, 'Alice Johnson', 78, 'B');
+   INSERT INTO STUDENTS (Roll_No, Name, Marks, Grade) VALUES (1,'Sanju Samson',75,'B'),(2,'Yuvraj Singh',78,'B'),(3,'M S Dhoni',85,'A'),(4,'Suresh Raina',62,'C'),(5,'Sachin Tendulkar',95,'A');
 
-   SELECT * FROM STUDENT;
+   SELECT * FROM STUDENTS;
    ```
 
 ### Add Column
-To add a column named `Contact` to the `STUDENT` table:
+To add a column named `Contact` to the `STUDENTS` table:
    ```sql
-   ALTER TABLE STUDENT ADD Contact VARCHAR(15);
+   ALTER TABLE STUDENTS ADD Contact VARCHAR(15);
    ```
 
 ### Remove Column
-To remove the `Grade` column from the `STUDENT` table:
+To remove the `Grade` column from the `STUDENTS` table:
    ```sql
-   ALTER TABLE STUDENT DROP COLUMN Grade;
+   ALTER TABLE STUDENTS DROP COLUMN Grade;
    ```
 
 ### Rename Table
-To rename the `STUDENT` table to `CLASSTEN`:
+To rename the `STUDENTS` table to `CLASSTEN`:
    ```sql
-   ALTER TABLE STUDENT RENAME TO CLASSTEN;
+   ALTER TABLE STUDENTS RENAME TO CLASSTEN;
    ```
 
 ### Delete Rows
@@ -84,6 +84,4 @@ To remove the `CLASSTEN` table from the database:
 
 ## Conclusion
 This project provides a basic understanding of how to create and manipulate tables using DDL commands in SQL. By executing these commands, we learned how to create a table, alter its structure, and remove it from the database. This provides a solid foundation for further database management and operations.
-```
 
-Let me know if any additional corrections or adjustments are needed!
