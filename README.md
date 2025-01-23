@@ -35,21 +35,21 @@ This project demonstrates various Data Definition Language (DDL) commands such a
     Marks INT,
     Grade CHAR(1));
    
-## Project Setup
+## Executing Commands
 **Create Table**: 
 Initially, create the table STUDENT with the columns Roll_No, Name, Marks, and Grade
 
 **Select Command**:
 Insert data into the STUDENT table and display the table using the SELECT command:
 
-  sql
+  ```sql
   INSERT INTO STUDENT (Roll_No, Name, Marks, Grade) VALUES (1, 'John Doe', 85, 'A'), (2, 'Jane Smith', 90, 'A'), (3, 'Alice Johnson', 78, 'B');
   SELECT * FROM STUDENT;
 
 **Add Column**
 To add a column named Contact to the STUDENT table:
 
-sql
+```sql
 ALTER TABLE STUDENT ADD Contact VARCHAR(15);
 
 **Remove Column**
