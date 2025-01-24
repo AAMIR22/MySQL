@@ -3,7 +3,7 @@ This repository contains SQL scripts
 
 # PROJECTS
 1. [01-DDL Commands SchoolDatabase](#01-DDL-Commands-SchoolDatabase)
-2. [# 2-DDL Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
+2. [02-DDL Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
 
 # 01-DDL Commands SchoolDatabase
 
