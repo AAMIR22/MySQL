@@ -1,6 +1,10 @@
 # MySQL
 This repository contains SQL scripts
 
+# PROJECTS
+1. [01-DDL Commands SchoolDatabase](#projectNIT-setup)
+2. 2.
+
 # 01-DDL Commands SchoolDatabase
 
 This project demonstrates various Data Definition Language (DDL) commands such as CREATE, ALTER, DROP, RENAME, and TRUNCATE on a database named `School`. The operations are performed on a table named `STUDENTS` with the following fields:
