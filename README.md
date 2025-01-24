@@ -93,66 +93,94 @@ This project provides a basic understanding of how to create and manipulate tabl
 
 # 2-DDL Constraints SalesDatabase
 
-## **Step 1: Create the Database**
-```sql
-CREATE DATABASE Sales;
-USE Sales;
-```
+This project demonstrates various Data Definition Language (DDL) commands such as CREATE, ALTER, DROP, and RENAME on a database named `Sales`. The operations are performed on a table named `Orders` with the following fields:
+- `Order_Id`
+- `Customer_Name`
+- `Product_Category`
+- `Ordered_Item`
+- `Contact_No`
 
-## **Step 2: Create the "Orders" Table**
-```sql
-CREATE TABLE Orders (
-    Order_Id INT PRIMARY KEY,
-    Customer_Name VARCHAR(50) NOT NULL,
-    Product_Category VARCHAR(20) NOT NULL,
-    Ordered_Item VARCHAR(50) NOT NULL,
-    Contact_No VARCHAR(20) UNIQUE NOT NULL
-);
-```
+## Contents
+1. [Project Setup](#project-setup)
+2. [Executing Commands](#executing-commands)
+    - [Create Table](#create-table)
+    - [Add Column](#add-column)
+    - [Rename Table](#rename-table)
+    - [Insert Rows](#insert-rows)
+    - [Select Command](#select-command)
+    - [Update Command](#update-command)
+    - [Drop Table](#drop-table)
+3. [Conclusion](#conclusion)
 
-## **Step 3: Add New Column to "Orders" Table**
-```sql
-ALTER TABLE Orders
-ADD COLUMN Order_Quantity INT;
-```
+## Project Setup
 
-## **Step 4: Rename the "Orders" Table to "Sales_Orders"**
-```sql
-ALTER TABLE Orders
-RENAME TO Sales_Orders;
-```
+1. **Create Database**:
+   ```sql
+   CREATE DATABASE Sales;
+   USE Sales;
+   ```
 
-## **Step 5: Insert Rows into "Sales_Orders" Table**
-```sql
-INSERT INTO Sales_Orders 
-(Order_Id, Customer_Name, Product_Category, Ordered_Item, Contact_No, Order_Quantity) VALUES 
-(1, "Sehwag", "Electronics", "Music Speaker", "9123456789", 1),
-(2, "Sachin", "Beverage", "Boost", "9891054321", 3),
-(3, "Dravid", "Construction", "Cement", "9865234112", 10),
-(4, "Ganguly", "Home Appliances", "Washing Machine", "9912345678", 1),
-(5, "Yuvi", "Sports", "Cricket Ball", "9812341234", 6),
-(6, "Sreesanth", "Sports", "Stumps", "9876543210", 169),
-(7, "Samson", "Sports", "Bowling Machine", "9991234123", 1),
-(8, "Dhoni", "Fitness", "Yoga Mat", "9543216789", 19),
-(9, "Raina", "Stationery", "Super Glue", "9876098765", 310),
-(10, "Jadeja", "Accessories", "Sword", "9988776655", 1);
-```
+2. **Create Table**:
+   ```sql
+   CREATE TABLE Orders (
+       Order_Id INT PRIMARY KEY,
+       Customer_Name VARCHAR(50) NOT NULL,
+       Product_Category VARCHAR(20) NOT NULL,
+       Ordered_Item VARCHAR(50) NOT NULL,
+       Contact_No VARCHAR(20) UNIQUE NOT NULL
+   );
+   ```
 
-## **Step 6: Retrieve Customer Name and Ordered Item**
-```sql
-SELECT Customer_Name, Ordered_Item 
-FROM Sales_Orders;
-```
+## Executing Commands
 
-## **Step 7: Update Ordered Item for a Specific Row**
-```sql
-UPDATE Sales_Orders 
-SET Ordered_Item = 'Cups' 
-WHERE Order_Id = 8;
-```
+### Create Table
+Initially, create the table `Orders` with the columns `Order_Id`, `Customer_Name`, `Product_Category`, `Ordered_Item`, and `Contact_No`.
 
-## **Step 8: Delete the "Sales_Orders" Table**
-```sql
-DROP TABLE Sales_Orders;
-```
+### Add Column
+To add a column named `Order_Quantity` to the `Orders` table:
+   ```sql
+   ALTER TABLE Orders ADD COLUMN Order_Quantity INT;
+   ```
 
+### Rename Table
+To rename the `Orders` table to `Sales_Orders`:
+   ```sql
+   ALTER TABLE Orders RENAME TO Sales_Orders;
+   ```
+
+### Insert Rows
+Insert data into the `Sales_Orders` table:
+   ```sql
+   INSERT INTO Sales_Orders (Order_Id, Customer_Name, Product_Category, Ordered_Item, Contact_No, Order_Quantity) VALUES
+   (1, "Sehwag", "Electronics", "Music Speaker", "9123456789", 1),
+   (2, "Sachin", "Beverage", "Boost", "9891054321", 3),
+   (3, "Dravid", "Construction", "Cement", "9865234112", 10),
+   (4, "Ganguly", "Home Appliances", "Washing Machine", "9912345678", 1),
+   (5, "Yuvi", "Sports", "Cricket Ball", "9812341234", 6),
+   (6, "Sreesanth", "Sports", "Stumps", "9876543210", 169),
+   (7, "Samson", "Sports", "Bowling Machine", "9991234123", 1),
+   (8, "Dhoni", "Fitness", "Yoga Mat", "9543216789", 19),
+   (9, "Raina", "Stationery", "Super Glue", "9876098765", 310),
+   (10, "Jadeja", "Accessories", "Sword", "9988776655", 1);
+   ```
+
+### Select Command
+Retrieve customer names and ordered items from the `Sales_Orders` table:
+   ```sql
+   SELECT Customer_Name, Ordered_Item FROM Sales_Orders;
+   ```
+
+### Update Command
+Update the ordered item for a specific row:
+   ```sql
+   UPDATE Sales_Orders SET Ordered_Item = 'Cups' WHERE Order_Id = 8;
+   ```
+
+### Drop Table
+Delete the `Sales_Orders` table from the database:
+   ```sql
+   DROP TABLE Sales_Orders;
+   ```
+
+## Conclusion
+This project provides a basic understanding of how to create and manipulate tables using DDL commands in SQL. By executing these commands, we learned how to create a database, alter table structures, insert data, and delete tables. This provides a solid foundation for further database management and operations.
