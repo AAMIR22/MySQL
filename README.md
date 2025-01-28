@@ -6,6 +6,9 @@ This repository contains SQL scripts
 2. [02-DDL Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
 3. [03-DML Commands Company Database](#3-DML-Commands-Company-Database)
 
+# 3-DML Commands Company Database1
+# 2-DDL Constraints SalesDatabase2
+
 # 01-DDL Commands SchoolDatabase
 
 This project demonstrates various Data Definition Language (DDL) commands such as CREATE, ALTER, DROP, RENAME, and TRUNCATE on a database named `School`. The operations are performed on a table named `STUDENTS` with the following fields:
@@ -176,7 +179,7 @@ Delete the `Sales_Orders` table from the database:
 ## Conclusion
 This project provides a basic understanding of how to create and manipulate tables using DDL commands in SQL. By executing these commands, we learned how to create a database, alter table structures, insert data, and delete tables. This provides a solid foundation for further database management and operations.
 
-## 03-DML Commands Company Database
+# 3-DML Commands Company Database
 
 This project demonstrates various DML commands such as INSERT, UPDATE and DELETE on a database named `Company`. The operations are performed on a table named `Managers`. Below is a detailed breakdown of the commands utilized and their purposes:
 
