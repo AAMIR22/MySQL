@@ -4,6 +4,7 @@ This repository contains SQL scripts
 # PROJECTS
 1. [01-DDL Commands SchoolDatabase](#01-DDL-Commands-SchoolDatabase)
 2. [02-DDL Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
+3. [03-DML Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
 
 # 01-DDL Commands SchoolDatabase
 
@@ -182,5 +183,107 @@ Delete the `Sales_Orders` table from the database:
    DROP TABLE Sales_Orders;
    ```
 
+
 ## Conclusion
 This project provides a basic understanding of how to create and manipulate tables using DDL commands in SQL. By executing these commands, we learned how to create a database, alter table structures, insert data, and delete tables. This provides a solid foundation for further database management and operations.
+
+## 03-DML Commands Company Database
+
+This project demonstrates various DML commands such as INSERT, UPDATE and DELETE on a database named `Company`. The operations are performed on a table named `Managers`. Below is a detailed breakdown of the commands utilized and their purposes:
+
+## Contents
+1. [Project Setup](#project-setup)
+2. [Executing Commands](#executing-commands)
+   - [Create Table](#create-table)
+   - [Insert Data](#insert-data)
+   - [Select Queries](#select-queries)
+   - [Update Data](#update-data)
+   - [View Ordered Data](#view-ordered-data)
+
+## Project Setup
+
+1. **Create Database**: 
+   ```sql
+   CREATE DATABASE Company;
+   USE Company;
+   ```
+
+2. **Create Table**:
+   ```sql
+   CREATE TABLE Managers (
+       Manager_Id INT AUTO_INCREMENT PRIMARY KEY,
+       First_name VARCHAR(50),
+       Last_Name VARCHAR(50),
+       DOB DATE,
+       Age INT CHECK (Age > 18), 
+       Last_update TIMESTAMP,
+       Gender CHAR(1) CHECK (Gender IN ('M','F','O')),
+       Department VARCHAR(30),
+       Salary DECIMAL(10,2) NOT NULL
+   );
+   ```
+
+## Executing Commands
+
+### Create Table
+Create the `Managers` table with columns that include `Manager_Id`, `First_name`, `Last_Name`, `DOB`, `Age`, `Last_update`, `Gender`, `Department`, and `Salary`.
+
+### Insert Data
+Insert multiple rows into the `Managers` table:
+   ```sql
+   INSERT INTO Managers (First_name, Last_Name, DOB, Age, Last_update, Gender, Department, Salary) VALUES
+   ('Tovino', 'Thomas', '1989-01-21', 34, CURRENT_TIMESTAMP, 'M', 'Marketing', 30000.00),
+   ('Basil', 'Joseph', '1990-04-28', 32, CURRENT_TIMESTAMP, 'M', 'Marketing', 28000.00),
+   ('Naslen', 'Gafoor', '2000-06-11', 24, CURRENT_TIMESTAMP, 'M', 'IT', 32000.00),
+   ('Fahadh', 'Faasil', '1982-08-08', 42, CURRENT_TIMESTAMP, 'M', 'Sales', 50000.00),
+   ('Aishwarya', 'Lekshmi', '1990-09-06', 34, CURRENT_TIMESTAMP, 'F', 'HR', 35000.00),
+   ('Anna', 'Ben', '1997-08-07', 27, CURRENT_TIMESTAMP, 'F', 'IT', 34000.00),
+   ('Prithviraj', 'Sukumaran', '1982-10-16', 42, CURRENT_TIMESTAMP, 'M', 'Finance', 35000.00),
+   ('Asif', 'Ali', '1986-02-04', 39, CURRENT_TIMESTAMP, 'M', 'Sales', 31000.00),
+   ('Soubin', 'Shahir', '1983-10-12', 41, CURRENT_TIMESTAMP, 'M', 'IT', 34000.00),
+   ('Neeraj', 'Madhav', '1990-03-26', 33, CURRENT_TIMESTAMP, 'M', 'Marketing', 26000.00),
+   ('Indrajith', 'Sukumaran', '1980-12-17', 44, CURRENT_TIMESTAMP, 'M', 'HR', 29000.00),
+   ('Sreenath', 'Bhasi', '1988-05-29', 35, CURRENT_TIMESTAMP, 'M', 'Finance', 24000.00),
+   ('Aaliya', 'Bhatt', '1993-03-15', 34, CURRENT_TIMESTAMP, 'F', 'Finance', 24000.00);
+   ```
+
+### Select Queries
+To retrieve data based on specific conditions:
+1. **View table by age order**:
+   ```sql
+   SELECT * FROM Managers ORDER BY Age;
+   ```
+
+2. **Retrieve the name and date of birth of the manager with Manager_Id 1**:
+   ```sql
+   SELECT First_name, Last_name, DOB FROM Managers WHERE Manager_Id = 1;
+   ```
+
+3. **Display the annual income of all managers**:
+   ```sql
+   SELECT Manager_Id, First_name, Last_name, Salary * 12 AS Annual_Income FROM Managers;
+   ```
+
+4. **Display records of all managers except 'Aaliya'**:
+   ```sql
+   SELECT * FROM Managers WHERE First_name <> 'Aaliya';
+   ```
+
+5. **Display details of managers whose department is IT and earn more than 25000 per month**:
+   ```sql
+   SELECT * FROM Managers WHERE Department = 'IT' AND Salary > 25000;
+   ```
+
+6. **Display details of managers whose salary is between 10000 and 35000**:
+   ```sql
+   SELECT * FROM Managers WHERE Salary BETWEEN 10000 AND 35000;
+   ```
+
+### View Ordered Data
+List all managers ordered by their age:
+```sql
+SELECT * FROM Managers ORDER BY Age;
+```
+
+## Conclusion
+This project provides an overview of using SQL to create and manage a database for a fictional company. By executing these commands, we learned how to create a table, insert data, and run various select queries to retrieve and manipulate data. This forms a basis for more advanced SQL operations and database management.
