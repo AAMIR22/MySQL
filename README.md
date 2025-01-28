@@ -6,8 +6,6 @@ This repository contains SQL scripts
 2. [02-DDL Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
 3. [03-DML Commands Company Database](#3-DML-Commands-Company-Database)
 
-# 3-DML Commands Company Database1
-# 2-DDL Constraints SalesDatabase2
 
 # 01-DDL Commands SchoolDatabase
 
