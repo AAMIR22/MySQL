@@ -93,7 +93,7 @@ This project provides a basic understanding of how to create and manipulate tabl
 
 # 2-DDL Constraints SalesDatabase
 
-This project demonstrates various Data Definition Language (DDL) commands such as CREATE, ALTER, DROP, and RENAME on a database named `Sales`. The operations are performed on a table named `Orders` with the following fields:
+This project demonstrates various Data Definition Language (DDL) constraints. DDL constraints are rules enforced on data columns to ensure the integrity and accuracy of the data in the database. Some common DDL constraints include: PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL and CHECK. Here database named `Sales`. The operations are performed on a table named `Orders` with the following fields:
 - `Order_Id`
 - `Customer_Name`
 - `Product_Category`
