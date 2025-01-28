@@ -1,11 +1,13 @@
 # MySQL
 This repository contains SQL scripts
 
-# PROJECTS
+# CONTENTS
 1. [01-DDL Commands SchoolDatabase](#01-DDL-Commands-SchoolDatabase)
 2. [02-DDL Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
 3. [03-DML Commands Company Database](#3-DML-Commands-Company-Database)
 
+   
+[Conclusion](#conclusion)
 
 # 01-DDL Commands SchoolDatabase
 
@@ -15,17 +17,6 @@ This project demonstrates various Data Definition Language (DDL) commands such a
 - `Marks`
 - `Grade`
 
-## Contents
-1. [Project Setup](#project-setup)
-2. [Executing Commands](#executing-commands)
-    - [Create Table](#create-table)
-    - [Select Command](#select-command)
-    - [Add Column](#add-column)
-    - [Remove Column](#remove-column)
-    - [Rename Table](#rename-table)
-    - [Delete Rows](#delete-rows)
-    - [Drop Table](#drop-table)
-3. [Conclusion](#conclusion)
 
 ## Project Setup
 
@@ -87,10 +78,6 @@ To remove the `CLASSTEN` table from the database:
    ```sql
    DROP TABLE CLASSTEN;
    ```
-
-## Conclusion
-This project provides a basic understanding of how to create and manipulate tables using DDL commands in SQL. By executing these commands, we learned how to create a table, alter its structure, and remove it from the database. This provides a solid foundation for further database management and operations.
-
 
 
 # 2-DDL Constraints SalesDatabase
@@ -173,9 +160,6 @@ Delete the `Sales_Orders` table from the database:
    DROP TABLE Sales_Orders;
    ```
 
-
-## Conclusion
-This project provides a basic understanding of how to create and manipulate tables using DDL commands in SQL. By executing these commands, we learned how to create a database, alter table structures, insert data, and delete tables. This provides a solid foundation for further database management and operations.
 
 # 3-DML Commands Company Database
 
@@ -267,4 +251,7 @@ SELECT * FROM Managers ORDER BY Age;
 ```
 
 ## Conclusion
-This project provides an overview of using SQL to create and manage a database for a fictional company. By executing these commands, we learned how to create a table, insert data, and run various select queries to retrieve and manipulate data. This forms a basis for more advanced SQL operations and database management.
+
+We've journeyed through the essentials of SQL, uncovering the fundamental commands that shape and maintain databases. Our exploration began with Data Definition Language (DDL) commands, where we learned how to create, alter, and remove database structures. Ensuring these structures are reliable, we delved into DDL constraints—such as primary keys, foreign keys, unique constraints, not null constraints, and check constraints. 
+
+Transitioning to Data Manipulation Language (DML) commands, we discovered how to insert new records, update existing data, and retrieve and delete information. These commands empower us to manage and manipulate the data within the tables defined by our DDL commands. By combining DDL, its constraints, and DML, we have a comprehensive toolkit for building and maintaining a robust and efficient database system.
