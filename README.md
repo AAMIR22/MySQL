@@ -4,7 +4,7 @@ This repository contains SQL scripts
 # PROJECTS
 1. [01-DDL Commands SchoolDatabase](#01-DDL-Commands-SchoolDatabase)
 2. [02-DDL Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
-3. [03-DML Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
+3. [03-DML Constraints SalesDatabase](#3-DML-Constraints-SalesDatabase)
 
 # 01-DDL Commands SchoolDatabase
 
@@ -101,17 +101,6 @@ This project demonstrates various Data Definition Language (DDL) constraints. DD
 - `Ordered_Item`
 - `Contact_No`
 
-## Contents
-1. [Project Setup](#project-setup)
-2. [Executing Commands](#executing-commands)
-    - [Create Table](#create-table)
-    - [Add Column](#add-column)
-    - [Rename Table](#rename-table)
-    - [Insert Rows](#insert-rows)
-    - [Select Command](#select-command)
-    - [Update Command](#update-command)
-    - [Drop Table](#drop-table)
-3. [Conclusion](#conclusion)
 
 ## Project Setup
 
@@ -190,15 +179,6 @@ This project provides a basic understanding of how to create and manipulate tabl
 ## 03-DML Commands Company Database
 
 This project demonstrates various DML commands such as INSERT, UPDATE and DELETE on a database named `Company`. The operations are performed on a table named `Managers`. Below is a detailed breakdown of the commands utilized and their purposes:
-
-## Contents
-1. [Project Setup](#project-setup)
-2. [Executing Commands](#executing-commands)
-   - [Create Table](#create-table)
-   - [Insert Data](#insert-data)
-   - [Select Queries](#select-queries)
-   - [Update Data](#update-data)
-   - [View Ordered Data](#view-ordered-data)
 
 ## Project Setup
 
