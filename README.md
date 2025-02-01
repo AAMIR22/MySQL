@@ -6,8 +6,7 @@ This repository contains SQL scripts
 2. [02-DDL Constraints: SalesDatabase](#02-DDL-Constraints-SalesDatabase)
 3. [03-DML Commands: Company Database](#03-DML-Commands-Company-Database)
 4. [04-SQL Querying Data: WorldPopulation Database](#04-WorldPopulation-Database)
-5. [05-Sorting and Grouping data: WorldPopulation Database](#05-WorldPopulation-Database-Project-(Sorting-and-Grouping-data))
-05 WorldPopulation Database Project (Sorting and Grouping data)
+5. [05-Sorting and Grouping data: WorldPopulation Database](05-Sorting-and-Grouping-data:-WorldPopulation-Database)
    
 [Conclusion](#conclusion)
 
@@ -384,7 +383,7 @@ This project demonstrates the creation and manipulation of a database named `Wor
     ```
 
     
-05 WorldPopulation Database Project (Sorting and Grouping data)
+#05-Sorting and Grouping data: WorldPopulation Database
 
 This project involves creating and populating two tables (`Country` and `Persons`) within a database named `WorldPopulation`. Below are the steps to set up the database, create the tables, insert data, and execute various SQL queries.
 
