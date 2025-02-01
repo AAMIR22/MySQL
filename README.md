@@ -383,7 +383,7 @@ This project demonstrates the creation and manipulation of a database named `Wor
     ```
 
     
-#05-Sorting and Grouping data: WorldPopulation Database
+# 05-Sorting and Grouping data: WorldPopulation Database
 
 This project involves creating and populating two tables (`Country` and `Persons`) within a database named `WorldPopulation`. Below are the steps to set up the database, create the tables, insert data, and execute various SQL queries.
 
@@ -465,32 +465,32 @@ VALUES
 
 ## Executing Commands
 
-### 1. Print the first three characters of `Country_name` from the `Country` table:
+** 1. Print the first three characters of `Country_name` from the `Country` table:
 ```sql
 SELECT SUBSTRING(Country_name, 1, 3) AS country_code FROM Country;
 ```
 
-### 2. Concatenate first name and last name from `Persons` table:
+** 2. Concatenate first name and last name from `Persons` table:
 ```sql
 SELECT Fname, Lname, CONCAT(Fname, ' ', Lname) AS Full_name FROM Persons;
 ```
 
-### 3. Count the number of unique country names from `Persons` table:
+** 3. Count the number of unique country names from `Persons` table:
 ```sql
 SELECT COUNT(DISTINCT Country_name) AS unique_count FROM Persons;
 ```
 
-### 4. Print the maximum population from the `Country` table:
+** 4. Print the maximum population from the `Country` table:
 ```sql
 SELECT MAX(Population) AS Maximum_population FROM Country;
 ```
 
-### 5. Print the minimum population from `Persons` table:
+** 5. Print the minimum population from `Persons` table:
 ```sql
 SELECT MIN(Population) AS Minimum_population FROM Persons;
 ```
 
-### 6. Insert 2 new rows to the `Persons` table with `Lname` as NULL, then count `Lname`:
+** 6. Insert 2 new rows to the `Persons` table with `Lname` as NULL, then count `Lname`:
 ```sql
 INSERT INTO Persons (Id, Fname, Lname, Population, Rating, Country_Id) VALUES
 (11, 'Tom', NULL, 11000, 5, 1),
@@ -499,37 +499,37 @@ INSERT INTO Persons (Id, Fname, Lname, Population, Rating, Country_Id) VALUES
 SELECT COUNT(Lname) AS Lname_count FROM Persons;
 ```
 
-### 7. Find the number of rows in the `Persons` table:
+** 7. Find the number of rows in the `Persons` table:
 ```sql
 SELECT COUNT(*) AS Total_count FROM Persons;
 ```
 
-### 8. Show the population of the `Country` table for the first 3 rows (Hint: Use LIMIT):
+** 8. Show the population of the `Country` table for the first 3 rows (Hint: Use LIMIT):
 ```sql
 SELECT Population FROM Country LIMIT 3;
 ```
 
-### 9. Print 3 random rows of countries (Hint: Use RAND() function and LIMIT):
+** 9. Print 3 random rows of countries (Hint: Use RAND() function and LIMIT):
 ```sql
 SELECT * FROM Country ORDER BY RAND() LIMIT 3;
 ```
 
-### 10. List all persons ordered by their rating in descending order:
+** 10. List all persons ordered by their rating in descending order:
 ```sql
 SELECT * FROM Persons ORDER BY Rating DESC;
 ```
 
-### 11. Find the total population for each country in the `Persons` table:
+** 11. Find the total population for each country in the `Persons` table:
 ```sql
 SELECT Country_name, SUM(Population) AS Total_population FROM Persons GROUP BY Country_name;
 ```
 
-### 12. Find countries in the `Persons` table with a total population greater than 50,000:
+** 12. Find countries in the `Persons` table with a total population greater than 50,000:
 ```sql
 SELECT Country_name, SUM(Population) AS Total_population FROM Persons GROUP BY Country_name HAVING Total_population > 50000;
 ```
 
-### 13. List the total number of persons and average rating for each country, but only for countries with more than 2 persons, ordered by the average rating in ascending order:
+** 13. List the total number of persons and average rating for each country, but only for countries with more than 2 persons, ordered by the average rating in ascending order:
 ```sql
 SELECT Country_name, COUNT(*) AS Persons_count, AVG(Rating) AS average FROM Persons GROUP BY Country_name HAVING Persons_count > 2 ORDER BY average ASC;
 ```
