@@ -6,7 +6,7 @@ This repository contains SQL scripts
 2. [02-DDL Constraints: SalesDatabase](#02-DDL-Constraints-SalesDatabase)
 3. [03-DML Commands: Company Database](#03-DML-Commands-Company-Database)
 4. [04-SQL Querying Data: WorldPopulation Database](#04-WorldPopulation-Database)
-5. [05-Sorting and Grouping data: WorldPopulation Database](05-Sorting-and-Grouping-data:-WorldPopulation-Database)
+5. [05-Sorting and Grouping data: WorldPopulation Database](#05-Sorting-and-Grouping-data-WorldPopulation-Database)#05-sorting-and-grouping-data-worldpopulation-database
    
 [Conclusion](#conclusion)
 
@@ -389,13 +389,13 @@ This project involves creating and populating two tables (`Country` and `Persons
 
 ## Project Setup
 
-### 1. Create Database
+**1. Create Database**
 ```sql
 CREATE DATABASE WorldPopulation;
 USE WorldPopulation;
 ```
 
-### 2. Create Tables
+**2. Create Tables**
 Create the `Country` table:
 ```sql
 CREATE TABLE Country (
@@ -420,7 +420,7 @@ CREATE TABLE Persons (
 );
 ```
 
-### 3. Insert Data into Tables
+**3. Insert Data into Tables**
 Insert rows into the `Country` table:
 ```sql
 INSERT INTO Country (Id, Country_name, Population, Area)
