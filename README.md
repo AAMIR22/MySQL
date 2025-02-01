@@ -2,9 +2,10 @@
 This repository contains SQL scripts
 
 # CONTENTS
-1. [01-DDL Commands SchoolDatabase](#01-DDL-Commands-SchoolDatabase)
-2. [02-DDL Constraints SalesDatabase](#02-DDL-Constraints-SalesDatabase)
-3. [03-DML Commands Company Database](#03-DML-Commands-Company-Database)
+1. [01-DDL Commands: SchoolDatabase](#01-DDL-Commands-SchoolDatabase)
+2. [02-DDL Constraints: SalesDatabase](#02-DDL-Constraints-SalesDatabase)
+3. [03-DML Commands: Company Database](#03-DML-Commands-Company-Database)
+4. [04-SQL Querying Data: WorldPopulation Database](#04-WorldPopulation-Database)
 
    
 [Conclusion](#conclusion)
