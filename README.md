@@ -3,8 +3,8 @@ This repository contains SQL scripts
 
 # CONTENTS
 1. [01-DDL Commands SchoolDatabase](#01-DDL-Commands-SchoolDatabase)
-2. [02-DDL Constraints SalesDatabase](#2-DDL-Constraints-SalesDatabase)
-3. [03-DML Commands Company Database](#3-DML-Commands-Company-Database)
+2. [02-DDL Constraints SalesDatabase](#02-DDL-Constraints-SalesDatabase)
+3. [03-DML Commands Company Database](#03-DML-Commands-Company-Database)
 
    
 [Conclusion](#conclusion)
@@ -80,7 +80,7 @@ To remove the `CLASSTEN` table from the database:
    ```
 
 
-# 2-DDL Constraints SalesDatabase
+# 02-DDL Constraints SalesDatabase
 
 This project demonstrates various Data Definition Language (DDL) constraints. DDL constraints are rules enforced on data columns to ensure the integrity and accuracy of the data in the database. Some common DDL constraints include: PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL and CHECK. Here database named `Sales`. The operations are performed on a table named `Orders` with the following fields:
 - `Order_Id`
@@ -161,7 +161,7 @@ Delete the `Sales_Orders` table from the database:
    ```
 
 
-# 3-DML Commands Company Database
+# 03-DML Commands Company Database
 
 This project demonstrates various DML commands such as INSERT, UPDATE and DELETE on a database named `Company`. The operations are performed on a table named `Managers`. Below is a detailed breakdown of the commands utilized and their purposes:
 
@@ -250,8 +250,142 @@ List all managers ordered by their age:
 SELECT * FROM Managers ORDER BY Age;
 ```
 
+# 04-WorldPopulation Database
+
+This project demonstrates the creation and manipulation of a database named `WorldPopulation`. The operations are performed on two tables: `Country` and `Persons`.
+
+## Project Setup
+
+1. **Create Database**:
+   ```sql
+   CREATE DATABASE WorldPopulation;
+   USE WorldPopulation;
+   ```
+
+2. **Create Tables**:
+
+   **Country Table**:
+   ```sql
+   CREATE TABLE Country (
+       Id INT PRIMARY KEY AUTO_INCREMENT,
+       Country_name VARCHAR(30),
+       Population INT,
+       Area DECIMAL(10,2)
+   );
+   ```
+
+   **Persons Table**:
+   ```sql
+   CREATE TABLE Persons (
+       Id INT PRIMARY KEY AUTO_INCREMENT,
+       Fname VARCHAR(50),
+       Lname VARCHAR(50),
+       Population INT,
+       Rating FLOAT,
+       Country_Id INT,
+       Country_name VARCHAR(50),
+       FOREIGN KEY (Country_Id) REFERENCES Country(Id)
+   );
+   ```
+
+3. **Insert Data**:
+
+   **Inserting into `Country` Table**:
+   ```sql
+   INSERT INTO Country (Id, Country_name, Population, Area)
+   VALUES 
+   (1, 'USA', 331000000, 9834000),
+   (2, 'India', 1393409038, 3287000),
+   (3, 'China', 1444216107, 9597000),
+   (4, 'Canada', 38000000, 9985000),
+   (5, 'UK', 67886011, 243610),
+   (6, 'Australia', 25687041, 7692000),
+   (7, 'Germany', 83200000, 357022),
+   (8, 'France', 67081000, 551695),
+   (9, 'Japan', 126300000, 377975),
+   (10, 'South Korea', 51780579, 100210),
+   (11, 'Estonia', 1326000, 45227),
+   (12, 'Trinidad and Tobago', 1400000, 5130),
+   (13, 'Botswana', 2338851, 581730),
+   (14, 'Gambia', 2347706, 11295),
+   (15, 'Mauritius', 1265740, 2040),
+   (16, 'Suriname', 618040, 163820),
+   (17, 'Montenegro', 620000, 13812);
+   ```
+
+   **Inserting into `Persons` Table**:
+   ```sql
+   INSERT INTO Persons (Id, Fname, Lname, Population, Rating, Country_Id, Country_name)
+   VALUES 
+   (1, 'Jaden', 'Smith', 1000, 4.5, 1, 'USA'),
+   (2, 'Tovino', 'Thomas', 2000, 4.7, 1, 'USA'),
+   (3, 'Naslen', 'Gafoor', 1500, 3.9, 2, 'India'),
+   (4, 'Jacky', 'Chan', 1700, 4.2, 3, 'China'),
+   (5, 'Bruce', 'Lee', 1300, 4.1, 4, 'Canada'),
+   (6, 'John', 'Cena', 1400, 4.6, 5, 'UK'),
+   (7, 'Will', 'Smith', 1800, 3.8, 6, 'Australia'),
+   (8, 'Emma', 'Watson', 1600, 4.8, 7, 'Germany'),
+   (9, 'Rihana', 'Safiya', 1900, 4.3, 8, 'France'),
+   (10, 'David', 'Miller', 1100, 4.0, NULL, NULL);
+   ```
+
+## SQL Queries
+
+1. **List the distinct country names from the `Persons` table**:
+   ```sql
+   SELECT DISTINCT Country_name FROM Persons;
+   ```
+
+2. **Select first names and last names from the `Persons` table with aliases**:
+   ```sql
+   SELECT Fname AS First_Name, Lname AS Last_Name, CONCAT(Fname, ' ', Lname) AS Full_Name FROM Persons;
+   ```
+
+3. **Find all persons with a rating greater than 4.0**:
+   ```sql
+   SELECT * FROM Persons WHERE Rating > 4.0;
+   ```
+
+4. **Find countries with a population greater than 10 lakhs**:
+   ```sql
+   SELECT Country_name, Population FROM Country WHERE Population > 1000000;
+   ```
+
+5. **Find persons who are from 'USA' or have a rating greater than 4.5**:
+   ```sql
+   SELECT * FROM Persons WHERE Country_name = 'USA' OR Rating > 4.5;
+   ```
+
+6. **Find all persons where the country name is NULL**:
+   ```sql
+   SELECT * FROM Persons WHERE Country_name IS NULL;
+   ```
+
+7. **Find all persons from the countries 'USA', 'Canada', and 'UK'**:
+   ```sql
+   SELECT * FROM Persons WHERE Country_name IN ('USA', 'Canada', 'UK');
+   ```
+
+8. **Find all persons not from the countries 'India' and 'Australia'**:
+   ```sql
+   SELECT * FROM Persons WHERE Country_name NOT IN ('India', 'Australia');
+   ```
+
+9. **Find all countries with a population between 5 lakhs and 20 lakhs**:
+   ```sql
+   SELECT * FROM Country WHERE Population BETWEEN 500000 AND 2000000;
+   ```
+
+10. **Find all countries whose names do not start with 'C'**:
+    ```sql
+    SELECT * FROM Country WHERE Country_name NOT LIKE 'C%';
+    ```
+
+
 ## Conclusion
 
-We've journeyed through the essentials of SQL, uncovering the fundamental commands that shape and maintain databases. Our exploration began with Data Definition Language (DDL) commands, where we learned how to create, alter, and remove database structures. Ensuring these structures are reliable, we delved into DDL constraints—such as primary keys, foreign keys, unique constraints, not null constraints, and check constraints. 
+We've journeyed through the essentials of SQL, uncovering the fundamental commands that shape and maintain databases. Our exploration began with Data Definition Language (DDL) commands, where we learned how to create, alter, and remove database structures. Ensuring these structures are reliable, we delved into DDL constraints—such as primary keys, foreign keys, unique constraints, not null constraints, and check constraints.
 
 Transitioning to Data Manipulation Language (DML) commands, we discovered how to insert new records, update existing data, and retrieve and delete information. These commands empower us to manage and manipulate the data within the tables defined by our DDL commands. By combining DDL, its constraints, and DML, we have a comprehensive toolkit for building and maintaining a robust and efficient database system.
+
+In essence, this project provides a practical example of creating and managing a relational database with essential SQL operations, offering valuable insights for anyone looking to build and maintain robust database systems.
