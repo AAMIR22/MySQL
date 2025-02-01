@@ -6,6 +6,7 @@ This repository contains SQL scripts
 2. [02-DDL Constraints: SalesDatabase](#02-DDL-Constraints-SalesDatabase)
 3. [03-DML Commands: Company Database](#03-DML-Commands-Company-Database)
 4. [04-SQL Querying Data: WorldPopulation Database](#04-WorldPopulation-Database)
+5. [05-Sorting and Grouping data: WorldPopulation Database](#05-WorldPopulation-Database-Project-(Sorting-and-Grouping-data))
 
    
 [Conclusion](#conclusion)
@@ -381,6 +382,158 @@ This project demonstrates the creation and manipulation of a database named `Wor
     ```sql
     SELECT * FROM Country WHERE Country_name NOT LIKE 'C%';
     ```
+
+    
+05 WorldPopulation Database Project (Sorting and Grouping data)
+
+This project involves creating and populating two tables (`Country` and `Persons`) within a database named `WorldPopulation`. Below are the steps to set up the database, create the tables, insert data, and execute various SQL queries.
+
+## Project Setup
+
+### 1. Create Database
+```sql
+CREATE DATABASE WorldPopulation;
+USE WorldPopulation;
+```
+
+### 2. Create Tables
+Create the `Country` table:
+```sql
+CREATE TABLE Country (
+    Id INT PRIMARY KEY,
+    Country_name VARCHAR(50),
+    Population INT,
+    Area INT
+);
+```
+
+Create the `Persons` table:
+```sql
+CREATE TABLE Persons (
+    Id INT PRIMARY KEY,
+    Fname VARCHAR(50),
+    Lname VARCHAR(50),
+    Population INT,
+    Rating INT,
+    Country_Id INT,
+    Country_name VARCHAR(50),
+    FOREIGN KEY (Country_Id) REFERENCES Country(Id)
+);
+```
+
+### 3. Insert Data into Tables
+Insert rows into the `Country` table:
+```sql
+INSERT INTO Country (Id, Country_name, Population, Area)
+VALUES 
+(1, 'USA', 331000000, 9834000),
+(2, 'India', 1393409038, 3287000),
+(3, 'China', 1444216107, 9597000),
+(4, 'Canada', 38000000, 9985000),
+(5, 'UK', 67886011, 243610),
+(6, 'Australia', 25687041, 7692000),
+(7, 'Germany', 83200000, 357022),
+(8, 'France', 67081000, 551695),
+(9, 'Japan', 126300000, 377975),
+(10, 'South Korea', 51780579, 100210),
+(11, 'Estonia', 1326000, 45227),
+(12, 'Trinidad and Tobago', 1400000, 5130),
+(13, 'Botswana', 2338851, 581730),
+(14, 'Gambia', 2347706, 11295),
+(15, 'Mauritius', 1265740, 2040),
+(16, 'Suriname', 618040, 163820),
+(17, 'Montenegro', 620000, 13812);
+```
+
+Insert rows into the `Persons` table:
+```sql
+INSERT INTO Persons (Id, Fname, Lname, Population, Rating, Country_Id, Country_name)
+VALUES 
+(1, 'Jaden', 'Smith', 10000, 4.5, 1, 'USA'),
+(2, 'Tovino', 'Thomas', 45000, 4.7, 1, 'USA'),
+(3, 'Naslen', 'Gafoor', 70000, 3.9, 2, 'India'),
+(4, 'Jacky', 'Chan', 60000, 4.2, 3, 'China'),
+(5, 'Bruce', 'Lee', 1300, 4.1, 4, 'Canada'),
+(6, 'John', 'Cena', 1400, 4.6, 5, 'USA'),
+(7, 'Will', 'Smith', 1800, 3.8, 6, 'Australia'),
+(8, 'Emma', 'Watson', 1600, 4.8, 7, 'Germany'),
+(9, 'Rihana', 'Safiya', 1900, 4.3, 8, 'France'),
+(10, 'David', 'Miller', 1100, 4.0, NULL, NULL),
+(11, 'Kevin', 'Pieterson', 1100, 4.0, NULL, 'India'),
+(12, 'Great', 'Khali', 1100, 4.0, NULL, 'India');
+```
+
+
+## Executing Commands
+
+### 1. Print the first three characters of `Country_name` from the `Country` table:
+```sql
+SELECT SUBSTRING(Country_name, 1, 3) AS country_code FROM Country;
+```
+
+### 2. Concatenate first name and last name from `Persons` table:
+```sql
+SELECT Fname, Lname, CONCAT(Fname, ' ', Lname) AS Full_name FROM Persons;
+```
+
+### 3. Count the number of unique country names from `Persons` table:
+```sql
+SELECT COUNT(DISTINCT Country_name) AS unique_count FROM Persons;
+```
+
+### 4. Print the maximum population from the `Country` table:
+```sql
+SELECT MAX(Population) AS Maximum_population FROM Country;
+```
+
+### 5. Print the minimum population from `Persons` table:
+```sql
+SELECT MIN(Population) AS Minimum_population FROM Persons;
+```
+
+### 6. Insert 2 new rows to the `Persons` table with `Lname` as NULL, then count `Lname`:
+```sql
+INSERT INTO Persons (Id, Fname, Lname, Population, Rating, Country_Id) VALUES
+(11, 'Tom', NULL, 11000, 5, 1),
+(12, 'Lucy', NULL, 12000, 4, 2);
+
+SELECT COUNT(Lname) AS Lname_count FROM Persons;
+```
+
+### 7. Find the number of rows in the `Persons` table:
+```sql
+SELECT COUNT(*) AS Total_count FROM Persons;
+```
+
+### 8. Show the population of the `Country` table for the first 3 rows (Hint: Use LIMIT):
+```sql
+SELECT Population FROM Country LIMIT 3;
+```
+
+### 9. Print 3 random rows of countries (Hint: Use RAND() function and LIMIT):
+```sql
+SELECT * FROM Country ORDER BY RAND() LIMIT 3;
+```
+
+### 10. List all persons ordered by their rating in descending order:
+```sql
+SELECT * FROM Persons ORDER BY Rating DESC;
+```
+
+### 11. Find the total population for each country in the `Persons` table:
+```sql
+SELECT Country_name, SUM(Population) AS Total_population FROM Persons GROUP BY Country_name;
+```
+
+### 12. Find countries in the `Persons` table with a total population greater than 50,000:
+```sql
+SELECT Country_name, SUM(Population) AS Total_population FROM Persons GROUP BY Country_name HAVING Total_population > 50000;
+```
+
+### 13. List the total number of persons and average rating for each country, but only for countries with more than 2 persons, ordered by the average rating in ascending order:
+```sql
+SELECT Country_name, COUNT(*) AS Persons_count, AVG(Rating) AS average FROM Persons GROUP BY Country_name HAVING Persons_count > 2 ORDER BY average ASC;
+```
 
 
 ## Conclusion
