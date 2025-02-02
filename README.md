@@ -7,7 +7,7 @@ This repository contains SQL scripts
 3. [03-DML Commands: Company Database](#03-DML-Commands-Company-Database)
 4. [04-SQL Querying Data: WorldPopulation Database](#04-WorldPopulation-Database)
 5. [05-Sorting and Grouping data: WorldPopulation Database](#05-Sorting-and-Grouping-data-WorldPopulation-Database)
-6. [06-Joins and Union : WorldPopulation Database](#06-Joins-and-Union-WorldPopulation-Database)
+6. [06-Joins and Union : WorldPopulation Database](#06-joins-and-union--worldpopulation-database)
    
 [Conclusion](#conclusion)
 
