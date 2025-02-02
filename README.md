@@ -629,4 +629,7 @@ We've journeyed through the essentials of SQL, uncovering the fundamental comman
 
 Transitioning to Data Manipulation Language (DML) commands, we discovered how to insert new records, update existing data, and retrieve and delete information. These commands empower us to manage and manipulate the data within the tables defined by our DDL commands. By combining DDL, its constraints, and DML, we have a comprehensive toolkit for building and maintaining a robust and efficient database system.
 
-In essence, this project provides a practical example of creating and managing a relational database with essential SQL operations, offering valuable insights for anyone looking to build and maintain robust database systems.
+Further, we explored the practical use of joins and unions to combine data from multiple tables, enhancing our ability to perform complex queries. We demonstrated how to perform inner join, left join, and right join on the `Country` and `Persons` tables. We also listed all distinct and non-distinct country names from both tables and rounded the ratings of all persons to the nearest integer.
+
+In essence, this project provides a practical example of creating and managing a relational database with essential SQL operations. It offers valuable insights for anyone looking to build and maintain robust database systems, making it an essential resource for both beginners and seasoned practitioners.
+
