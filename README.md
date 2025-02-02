@@ -84,7 +84,8 @@ To remove the `CLASSTEN` table from the database:
 
 # 02-DDL Constraints SalesDatabase
 
-[Go to vcontents](#contents)
+[👆Go back to Contents](#contents)
+
 
 This project demonstrates various Data Definition Language (DDL) constraints. DDL constraints are rules enforced on data columns to ensure the integrity and accuracy of the data in the database. Some common DDL constraints include: PRIMARY KEY, FOREIGN KEY, UNIQUE, NOT NULL and CHECK. Here database named `Sales`. The operations are performed on a table named `Orders` with the following fields:
 - `Order_Id`
@@ -166,6 +167,8 @@ Delete the `Sales_Orders` table from the database:
 
 
 # 03-DML Commands Company Database
+
+[👆Go back to Contents](#contents)
 
 This project demonstrates various DML commands such as INSERT, UPDATE and DELETE on a database named `Company`. The operations are performed on a table named `Managers`. Below is a detailed breakdown of the commands utilized and their purposes:
 
@@ -255,6 +258,8 @@ SELECT * FROM Managers ORDER BY Age;
 ```
 
 # 04-WorldPopulation Database
+
+[👆Go back to Contents](#contents)
 
 This project demonstrates the creation and manipulation of a database named `WorldPopulation`. The operations are performed on two tables: `Country` and `Persons`.
 
@@ -387,6 +392,8 @@ This project demonstrates the creation and manipulation of a database named `Wor
 
     
 # 05-Sorting and Grouping data: WorldPopulation Database
+
+[👆Go back to Contents](#contents)
 
 This project involves creating and populating two tables (`Country` and `Persons`) within a database named `WorldPopulation`. Below are the steps to set up the database, create the tables, insert data, and execute various SQL queries.
 
@@ -542,6 +549,8 @@ SELECT Country_name, COUNT(*) AS Persons_count, AVG(Rating) AS average FROM Pers
 
 
 # 06-Joins and Union : WorldPopulation Database
+
+[👆Go back to Contents](#contents)
 
 This project involves working with two tables `Country` and `Persons` within a database named `worldpopulation`. Below are the steps to perform various SQL queries on these tables.
 
