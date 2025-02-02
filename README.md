@@ -7,6 +7,7 @@ This repository contains SQL scripts
 3. [03-DML Commands: Company Database](#03-DML-Commands-Company-Database)
 4. [04-SQL Querying Data: WorldPopulation Database](#04-WorldPopulation-Database)
 5. [05-Sorting and Grouping data: WorldPopulation Database](#05-Sorting-and-Grouping-data-WorldPopulation-Database)
+6. [06-Joins and Union : WorldPopulation Database](#06-Joins-and-Union-WorldPopulation-Database)
    
 [Conclusion](#conclusion)
 
@@ -534,6 +535,80 @@ SELECT Country_name, SUM(Population) AS Total_population FROM Persons GROUP BY C
 **13. List the total number of persons and average rating for each country, but only for countries with more than 2 persons, ordered by the average rating in ascending order:**
 ```sql
 SELECT Country_name, COUNT(*) AS Persons_count, AVG(Rating) AS average FROM Persons GROUP BY Country_name HAVING Persons_count > 2 ORDER BY average ASC;
+```
+
+
+
+# 06-Joins and Union : WorldPopulation Database
+
+This project involves working with two tables `Country` and `Persons` within a database named `worldpopulation`. Below are the steps to perform various SQL queries on these tables.
+
+## Project Setup
+
+**1. Use Database**
+
+```sql
+USE worldpopulation;
+```
+
+**2. Describe Tables**
+
+```sql
+DESC country;
+-- Id, Country_name, Population, Area
+
+DESC persons;
+-- Id, Fname, Lname, Population, Rating, Country_Id, Country_Name
+```
+
+## SQL Queries
+
+**1. Perform Inner Join, Left Join, and Right Join on the tables**
+
+- **Inner Join**
+    ```sql
+    SELECT c.country_name, c.population, p.Id, CONCAT(p.Fname, ' ', p.Lname) AS Full_name 
+    FROM country c 
+    INNER JOIN persons p ON c.country_name = p.country_name 
+    ORDER BY p.id;
+    ```
+
+- **Left Join**
+    ```sql
+    SELECT c.country_name, c.population, p.Id, CONCAT(p.Fname, ' ', p.Lname) AS Full_name 
+    FROM country c 
+    LEFT JOIN persons p ON c.country_name = p.country_name 
+    ORDER BY p.id;
+    ```
+
+- **Right Join**
+    ```sql
+    SELECT c.country_name, c.population, p.Id, CONCAT(p.Fname, ' ', p.Lname) AS Full_name 
+    FROM country c 
+    RIGHT JOIN persons p ON c.country_name = p.country_name 
+    ORDER BY p.id;
+    ```
+
+**2. List all distinct country names from both the Country and Persons tables**
+
+```sql
+SELECT DISTINCT country_name FROM country
+UNION
+SELECT DISTINCT country_name FROM persons;
+```
+
+**3. List all country names from both the Country and Persons tables, including duplicates**
+
+```sql
+SELECT country_name FROM country
+UNION ALL
+SELECT country_name FROM persons;
+```
+
+**4. Round the ratings of all persons to the nearest integer in the Persons table**
+
+```sql
+SELECT Fname, Lname, Rating, ROUND(Rating) AS Rounded_rating FROM persons;
 ```
 
 
