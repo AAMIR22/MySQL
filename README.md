@@ -622,6 +622,80 @@ SELECT country_name FROM persons;
 SELECT Fname, Lname, Rating, ROUND(Rating) AS Rounded_rating FROM persons;
 ```
 
+# 07-Functions
+
+[👆Go back to Contents](#contents)
+
+This repository contains SQL scripts to perform various tasks on `Persons` and `Country` tables. The tasks include adding a new column, creating a user-defined function, and performing various SQL queries to manipulate and extract data.
+
+## Project Setup
+
+ 1. Add a new column called DOB in Persons table with data type as Date
+
+```sql
+ALTER TABLE Persons
+ADD DOB DATE;
+```
+
+## User-Defined Function to Calculate Age
+Create a user-defined function to calculate age using the `DOB` column:
+
+```sql
+DELIMITER $$
+
+CREATE FUNCTION calculate_age(dob DATE)
+RETURNS INT
+DETERMINISTIC
+NO SQL
+BEGIN
+    DECLARE age INT;
+    IF MONTH(dob) > MONTH(CURDATE()) THEN
+        SET age = YEAR(CURDATE()) - YEAR(dob) - 1;
+    ELSEIF MONTH(dob) = MONTH(CURDATE()) AND DAY(dob) > DAY(CURDATE()) THEN
+        SET age = YEAR(CURDATE()) - YEAR(dob) - 1;
+    ELSE 
+        SET age = YEAR(CURDATE()) - YEAR(dob);
+    END IF;
+    RETURN age;
+END $$
+
+DELIMITER ;
+```
+
+## Fetching Age of All Persons
+To fetch the age of all persons using the function that has been created, use the following SQL query:
+
+```sql
+SELECT Name, calculate_age(DOB) AS Age
+FROM Persons;
+```
+
+## Country Table Queries
+
+### Length of Each Country Name
+To find the length of each country name in the `Country` table, use the following SQL query:
+
+```sql
+SELECT CountryName, LENGTH(CountryName) AS NameLength
+FROM Country;
+```
+
+### First Three Characters of Each Country Name
+To extract the first three characters of each country's name in the `Country` table, use the following SQL query:
+
+```sql
+SELECT CountryName, LEFT(CountryName, 3) AS FirstThreeChars
+FROM Country;
+```
+
+### Country Names in Uppercase and Lowercase
+To convert all country names to uppercase and lowercase in the `Country` table, use the following SQL query:
+
+```sql
+SELECT CountryName, UPPER(CountryName) AS UpperCaseName, LOWER(CountryName) AS LowerCaseName
+FROM Country;
+```
+
 
 ## Conclusion
 
