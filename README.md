@@ -8,6 +8,7 @@ This repository contains SQL scripts
 4. [04-SQL Querying Data: WorldPopulation Database](#04-WorldPopulation-Database)
 5. [05-Sorting and Grouping data: WorldPopulation Database](#05-Sorting-and-Grouping-data-WorldPopulation-Database)
 6. [06-Joins and Union : WorldPopulation Database](#06-joins-and-union--worldpopulation-database)
+7. [07-Functions : WorldPopulation Database](#07-Functions--WorldPopulation-Database)
    
 [Conclusion](#conclusion)
 
@@ -622,7 +623,7 @@ SELECT country_name FROM persons;
 SELECT Fname, Lname, Rating, ROUND(Rating) AS Rounded_rating FROM persons;
 ```
 
-# 07-Functions
+# 07-Functions : WorldPopulation Database
 
 [👆Go back to Contents](#contents)
 
@@ -630,14 +631,14 @@ This repository contains SQL scripts to perform various tasks on `Persons` and `
 
 ## Project Setup
 
-** 1. Add a new column called DOB in Persons table with data type as Date **
+**1. Add a new column called DOB in Persons table with data type as Date**
 
 ```sql
 ALTER TABLE Persons
 ADD DOB DATE;
 ```
 
-** 2. Write a user-defined function to calculate age using DOB **
+**2. Write a user-defined function to calculate age using DOB**
 
 ```sql
 DELIMITER $$
@@ -661,7 +662,7 @@ END $$
 DELIMITER ;
 ```
 
-** 3. Write a select query to fetch the Age of all persons using the function that has been created **
+**3. Write a select query to fetch the Age of all persons using the function that has been created**
 
 ```sql
 SELECT Name, calculate_age(DOB) AS Age
@@ -670,21 +671,21 @@ FROM Persons;
 
 ## Country Table Queries
 
-** 4. Find the length of each country name in the Country table **
+**4. Find the length of each country name in the Country table**
 
 ```sql
 SELECT CountryName, LENGTH(CountryName) AS NameLength
 FROM Country;
 ```
 
-** 5. Extract the first three characters of each country's name in the Country table **
+**5. Extract the first three characters of each country's name in the Country table**
 
 ```sql
 SELECT CountryName, LEFT(CountryName, 3) AS FirstThreeChars
 FROM Country;
 ```
 
-** 6. Convert all country names to uppercase and lowercase in the Country table **
+**6. Convert all country names to uppercase and lowercase in the Country table**
 
 ```sql
 SELECT CountryName, UPPER(CountryName) AS UpperCaseName, LOWER(CountryName) AS LowerCaseName
