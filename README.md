@@ -630,15 +630,14 @@ This repository contains SQL scripts to perform various tasks on `Persons` and `
 
 ## Project Setup
 
- 1. Add a new column called DOB in Persons table with data type as Date
+** 1. Add a new column called DOB in Persons table with data type as Date **
 
 ```sql
 ALTER TABLE Persons
 ADD DOB DATE;
 ```
 
-## User-Defined Function to Calculate Age
-Create a user-defined function to calculate age using the `DOB` column:
+** 2. Write a user-defined function to calculate age using DOB **
 
 ```sql
 DELIMITER $$
@@ -662,8 +661,7 @@ END $$
 DELIMITER ;
 ```
 
-## Fetching Age of All Persons
-To fetch the age of all persons using the function that has been created, use the following SQL query:
+** 3. Write a select query to fetch the Age of all persons using the function that has been created **
 
 ```sql
 SELECT Name, calculate_age(DOB) AS Age
@@ -672,24 +670,21 @@ FROM Persons;
 
 ## Country Table Queries
 
-### Length of Each Country Name
-To find the length of each country name in the `Country` table, use the following SQL query:
+** 4. Find the length of each country name in the Country table **
 
 ```sql
 SELECT CountryName, LENGTH(CountryName) AS NameLength
 FROM Country;
 ```
 
-### First Three Characters of Each Country Name
-To extract the first three characters of each country's name in the `Country` table, use the following SQL query:
+** 5. Extract the first three characters of each country's name in the Country table **
 
 ```sql
 SELECT CountryName, LEFT(CountryName, 3) AS FirstThreeChars
 FROM Country;
 ```
 
-### Country Names in Uppercase and Lowercase
-To convert all country names to uppercase and lowercase in the `Country` table, use the following SQL query:
+** 6. Convert all country names to uppercase and lowercase in the Country table **
 
 ```sql
 SELECT CountryName, UPPER(CountryName) AS UpperCaseName, LOWER(CountryName) AS LowerCaseName
