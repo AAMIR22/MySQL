@@ -9,6 +9,7 @@ This repository contains SQL scripts
 5. [05-Sorting and Grouping data: WorldPopulation Database](#05-Sorting-and-Grouping-data-WorldPopulation-Database)
 6. [06-Joins and Union : WorldPopulation Database](#06-joins-and-union--worldpopulation-database)
 7. [07-Functions : WorldPopulation Database](#07-Functions--WorldPopulation-Database)
+8. [08-Subqueries and Views : WorldPopulation and Product Database](#08-Subqueries-and-Views--WorldPopulation-and-Product-Database)
    
    [Conclusion](#conclusion)
 
@@ -693,13 +694,153 @@ FROM Country;
 ```
 
 
+# 08-Subqueries and Views : WorldPopulation and Product Database
+
+[👆Go back to Contents](#contents)
+
+Below SQL queries and tasks related to subqueries and views. The tasks are performed on a `Country` table and a `Persons` table, as well as on a `Customer` table in the `Product` database. The following sections provide details and SQL queries for each task.
+
+## Part 1: Subqueries
+
+**1. Find the number of persons in each country**
+```sql
+SELECT country_name, COUNT(*) AS number_of_persons
+FROM persons
+GROUP BY country_name;
+```
+
+**2. Find the number of persons in each country sorted from high to low**
+```sql
+SELECT country_name, COUNT(*) AS number_of_persons
+FROM persons
+GROUP BY country_name
+ORDER BY number_of_persons DESC;
+```
+
+**3. Find out the average rating for Persons in respective countries if the average is greater than 3.0**
+```sql
+SELECT country_name, AVG(rating) AS average_rating
+FROM persons
+GROUP BY country_name
+HAVING AVG(rating) > 3.0;
+```
+
+**4. Find the countries with the same rating as the USA (Use Subqueries)**
+```sql
+SELECT DISTINCT country_name
+FROM persons
+WHERE rating = (SELECT rating FROM persons WHERE country_name = 'USA');
+```
+
+**5. Select all countries whose population is greater than the average population of all nations**
+```sql
+SELECT country_name
+FROM country
+WHERE population > (SELECT AVG(population) FROM country);
+```
+
+## Part 2: Views
+
+**Create the `Customer` Table**
+First, create the `Product` database and `Customer` table:
+```sql
+CREATE DATABASE Product;
+
+USE Product;
+
+CREATE TABLE Customer (
+    Customer_Id INT PRIMARY KEY,
+    First_name VARCHAR(50),
+    Last_name VARCHAR(50),
+    Email VARCHAR(100),
+    Phone_no VARCHAR(20),
+    Address VARCHAR(100),
+    City VARCHAR(50),
+    State VARCHAR(50),
+    Zip_code VARCHAR(20),
+    Country VARCHAR(50)
+);
+```
+
+**Insert Data into `Customer` Table**
+Populate the `Customer` table with sample data:
+```sql
+INSERT INTO Customer (Customer_Id, First_name, Last_name, Email, Phone_no, Address, City, State, Zip_code, Country)
+VALUES
+(1, 'John', 'Doe', 'john.doe@example.com', '123-456-7890', '123 Elm Street', 'Springfield', 'Illinois', '62701', 'USA'),
+(2, 'Jane', 'Smith', 'jane.smith@example.com', '234-567-8901', '456 Oak Avenue', 'Los Angeles', 'California', '90001', 'USA'),
+(3, 'Michael', 'Brown', 'michael.brown@example.com', '345-678-9012', '789 Pine Road', 'San Francisco', 'California', '94101', 'USA'),
+(4, 'Emily', 'Davis', 'emily.davis@example.com', '456-789-0123', '101 Maple Street', 'Seattle', 'Washington', '98101', 'USA'),
+(5, 'David', 'Wilson', 'david.wilson@example.com', '567-890-1234', '202 Birch Lane', 'New York', 'New York', '10001', 'USA'),
+(6, 'Sophia', 'Taylor', 'sophia.taylor@example.com', '678-901-2345', '303 Cedar Street', 'Austin', 'Texas', '73301', 'USA'),
+(7, 'William', 'Martinez', 'william.martinez@example.com', '789-012-3456', '404 Spruce Avenue', 'Chicago', 'Illinois', '60601', 'USA'),
+(8, 'Olivia', 'Anderson', 'olivia.anderson@example.com', '890-123-4567', '505 Willow Road', 'Houston', 'Texas', '77001', 'USA'),
+(9, 'James', 'Thomas', 'james.thomas@example.com', '901-234-5678', '606 Ash Street', 'Denver', 'Colorado', '80201', 'USA'),
+(10, 'Ava', 'Jackson', 'ava.jackson@example.com', '012-345-6789', '707 Chestnut Street', 'Boston', 'Massachusetts', '02101', 'USA');
+```
+
+**1. Create a view named `customer_info` for the `Customer` table that displays Customer’s Full name and email address. Then perform the SELECT operation for the `customer_info` view.**
+```sql
+CREATE VIEW customer_info AS
+SELECT CONCAT(First_name, ' ', Last_name) AS Full_name, Email
+FROM Customer;
+
+-- SELECT operation for the customer_info view
+SELECT * FROM customer_info;
+```
+
+**2. Create a view named `US_Customers` that displays customers located in the US.**
+```sql
+CREATE VIEW US_Customers AS
+SELECT * FROM Customer
+WHERE Country = 'USA';
+```
+
+**3. Create another view named `Customer_details` with columns full name (Combine first_name and last_name), email, phone_no, and state.**
+```sql
+CREATE VIEW Customer_details AS
+SELECT CONCAT(First_name, ' ', Last_name) AS Full_name, Email, Phone_no, State
+FROM Customer;
+```
+
+**4. Update phone numbers of customers who live in California for `Customer_details` view.
+```sql
+UPDATE Customer
+SET Phone_no = 'New_Phone_Number' 
+WHERE State = 'California';
+```
+
+**5. Count the number of customers in each state and show only states with more than 5 customers.**
+```sql
+SELECT State, COUNT(*) AS number_of_customers
+FROM Customer
+GROUP BY State
+HAVING COUNT(*) > 5;
+```
+
+**6. Write a query that will return the number of customers in each state, based on the "state" column in the `Customer_details` view.**
+```sql
+SELECT State, COUNT(*) AS number_of_customers
+FROM Customer_details
+GROUP BY State;
+```
+
+**7. Write a query that returns all the columns from the `Customer_details` view, sorted by the "state" column in ascending order.**
+```sql
+SELECT * FROM Customer_details
+ORDER BY State ASC;
+```
+
+
+
+
 ## Conclusion
 
 We've journeyed through the essentials of SQL, uncovering the fundamental commands that shape and maintain databases. Our exploration began with Data Definition Language (DDL) commands, where we learned how to create, alter, and remove database structures. Ensuring these structures are reliable, we delved into DDL constraints—such as primary keys, foreign keys, unique constraints, not null constraints, and check constraints.
 
 Transitioning to Data Manipulation Language (DML) commands, we discovered how to insert new records, update existing data, and retrieve and delete information. These commands empower us to manage and manipulate the data within the tables defined by our DDL commands. By combining DDL, its constraints, and DML, we have a comprehensive toolkit for building and maintaining a robust and efficient database system.
 
-Further, we explored the practical use of joins and unions to combine data from multiple tables, enhancing our ability to perform complex queries. We demonstrated how to perform inner join, left join, and right join on the `Country` and `Persons` tables. We also listed all distinct and non-distinct country names from both tables and rounded the ratings of all persons to the nearest integer.
+Further, we explored the practical use of joins and unions to combine data from multiple tables, enhancing our ability to perform complex queries. We demonstrated how to perform inner join, left join, and right join on the `Country` and `Persons` tables. We also listed all distinct and non-distinct country names from both tables and rounded the ratings of all persons to the nearest integer. Another section provides SQL queries and steps for various tasks related to subqueries and views.
 
 In essence, this project provides a practical example of creating and managing a relational database with essential SQL operations. It offers valuable insights for anyone looking to build and maintain robust database systems, making it an essential resource for both beginners and seasoned practitioners.
 
