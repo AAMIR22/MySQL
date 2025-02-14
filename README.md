@@ -10,6 +10,7 @@ This repository contains SQL scripts
 6. [06-Joins and Union : WorldPopulation Database](#06-joins-and-union--worldpopulation-database)
 7. [07-Functions : WorldPopulation Database](#07-Functions--WorldPopulation-Database)
 8. [08-Subqueries and Views : WorldPopulation and Product Database](#08-Subqueries-and-Views--WorldPopulation-and-Product-Database)
+9. [09-Stored Procedures : Company database Worker](#09-Stored-Procedures--Company-database-Worker)
    
    [Conclusion](#conclusion)
 
@@ -832,6 +833,166 @@ ORDER BY State ASC;
 ```
 
 
+# 09 Stored Procedures : Company database Worker
+
+[👆Go back to Contents](#contents)
+
+## Table Description
+Consider the Worker table with the following fields:
+- Worker_Id INT
+- FirstName CHAR(25)
+- LastName CHAR(25)
+- Salary INT(15)
+- JoiningDate DATETIME
+- Department CHAR(25)
+
+## SQL Scripts
+
+**1. Creating Database and Table**
+
+```sql
+CREATE DATABASE Companydb;
+
+-- Use the created database
+USE Companydb;
+
+-- Create Worker table
+CREATE TABLE Worker (
+    Worker_Id INT PRIMARY KEY,
+    FirstName CHAR(25),
+    LastName CHAR(25),
+    Salary INT(15),
+    JoiningDate DATETIME,
+    Department CHAR(25)
+);
+```
+
+**2. Adding a New Record to the Worker Table**
+
+Create a stored procedure that takes in IN parameters for all the columns in the Worker table and adds a new record to the table.
+
+```sql
+DELIMITER //
+CREATE PROCEDURE addemployee (
+    IN nworker_id INT,
+    IN nFirstName CHAR(25),
+    IN nLastName CHAR(25),
+    IN nSalary INT(15),
+    IN nJoiningDate DATETIME,
+    IN nDepartment CHAR(25)
+)
+BEGIN
+    INSERT INTO worker (worker_id, FirstName, LastName, Salary, JoiningDate, Department)
+    VALUES (nworker_id, nFirstName, nLastName, nSalary, nJoiningDate, nDepartment);
+END //
+DELIMITER ;
+
+-- Procedure Calls
+CALL addemployee(1, 'WILL', 'SMITH', 50000, '2023-06-07', 'HR');
+CALL addemployee(2, 'JADEN', 'SMITH', 40000, '2024-03-07', 'ACCOUNTS');
+CALL addemployee(3, 'ROBERT', 'DOWNEY JR', 90000, '2012-05-03', 'ADMIN');
+
+-- Verify Records
+SELECT * FROM WORKER;
+```
+
+**3. Retrieve Salary of Worker by Worker ID**
+
+Write a stored procedure that takes in an IN parameter for WORKER_ID and an OUT parameter for SALARY. It should retrieve the salary of the worker with the given ID and return it in the p_salary parameter.
+
+```sql
+DELIMITER //
+CREATE PROCEDURE GETSALARY (
+    IN n_workerid INT,
+    OUT p_salary INT
+)
+BEGIN
+    SELECT salary INTO p_salary
+    FROM worker
+    WHERE worker_id = n_workerid;
+END //
+DELIMITER ;
+
+-- Procedure Call
+SET @p_salary = 0;
+CALL GETSALARY(1, @p_salary);
+SELECT @p_salary AS Salary_of_the_employee;
+
+-- Drop Procedure (if needed)
+DROP PROCEDURE GETSALARY;
+```
+
+**4. Update Department of Worker by Worker ID**
+
+Create a stored procedure that takes in IN parameters for WORKER_ID and DEPARTMENT. It should update the department of the worker with the given ID.
+
+```sql
+DELIMITER //
+CREATE PROCEDURE update_dept (
+    IN n_workerid INT,
+    IN n_dept VARCHAR(25)
+)
+BEGIN
+    UPDATE worker
+    SET department = n_dept
+    WHERE worker_id = n_workerid;
+END //
+DELIMITER ;
+
+-- Procedure Calls
+CALL update_dept(1, 'ADMIN');
+CALL update_dept(2, 'SALES');
+
+-- Verify Records
+SELECT * FROM WORKER;
+```
+
+**5. Retrieve Worker Count by Department**
+
+Write a stored procedure that takes in an IN parameter for DEPARTMENT and an OUT parameter for p_workerCount. It should retrieve the number of workers in the given department and return it in the p_workerCount parameter.
+
+```sql
+DELIMITER //
+CREATE PROCEDURE workercount (
+    IN dept VARCHAR(25),
+    OUT p_workercount INT
+)
+BEGIN
+    SELECT COUNT(*) INTO p_workercount
+    FROM worker
+    WHERE department = dept;
+END //
+DELIMITER ;
+
+-- Procedure Call
+CALL workercount('admin', @p_workercount);
+SELECT @p_workercount AS Number_of_workers;
+```
+
+**6. Retrieve Average Salary by Department**
+
+Write a stored procedure that takes in an IN parameter for DEPARTMENT and an OUT parameter for p_avgSalary. It should retrieve the average salary of all workers in the given department and return it in the p_avgSalary parameter.
+
+```sql
+DELIMITER //
+CREATE PROCEDURE avgsalary (
+    IN dept VARCHAR(25),
+    OUT p_avgsalary INT
+)
+BEGIN
+    SELECT AVG(salary) INTO p_avgsalary
+    FROM worker
+    WHERE department = dept;
+END //
+DELIMITER ;
+
+-- Procedure Call
+CALL avgsalary("admin", @p_avgsalary);
+SELECT @p_avgsalary AS Average_Salary;
+
+-- Verify Records
+SELECT * FROM WORKER;
+```
 
 
 ## Conclusion
