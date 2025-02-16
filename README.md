@@ -11,6 +11,7 @@ This repository contains SQL scripts
 7. [07-Functions : WorldPopulation Database](#07-Functions--WorldPopulation-Database)
 8. [08-Subqueries and Views : WorldPopulation and Product Database](#08-Subqueries-and-Views--WorldPopulation-and-Product-Database)
 9. [09-Stored Procedures : Company database Worker](#09-Stored-Procedures--Company-database-Worker)
+10. [10 Triggers : Teachers Database](#10-Triggers--Teachers-Database)
    
    [Conclusion](#conclusion)
 
@@ -994,6 +995,144 @@ SELECT @p_avgsalary AS Average_Salary;
 SELECT * FROM WORKER;
 ```
 
+# 10 Triggers : Teachers Database
+
+[👆Go back to Contents](#contents)
+
+This project creates a `teachers` table with several triggers to enforce data integrity and log changes. Below are the steps and SQL code to set up the database, create the necessary triggers, and test them.
+
+**1. Create the `teachers` Table**
+
+Create a database named `highschooldb` and create a table named `teachers` with fields `id`, `name`, `subject`, `experience`, and `salary`. Insert 8 rows into the table.
+
+```sql
+CREATE DATABASE highschooldb;
+USE highschooldb;
+
+CREATE TABLE teachers (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    subject VARCHAR(50),
+    experience INT,
+    salary DECIMAL(10, 2)
+);
+
+INSERT INTO teachers (id, name, subject, experience, salary) VALUES
+(1, 'Alice', 'Math', 11, 5000.00),
+(2, 'Bob', 'Science', 8, 5500.00),
+(3, 'Charlie', 'History', 12, 6000.00),
+(4, 'David', 'Geography', 7, 5200.00),
+(5, 'Eva', 'English', 6, 5100.00),
+(6, 'Frank', 'Physics', 3, 4700.00),
+(7, 'Grace', 'Chemistry', 9, 5700.00),
+(8, 'Hannah', 'Biology', 12, 5800.00);
+```
+
+**2. Create Before Insert Trigger**
+
+Create a `before_insert_teacher` trigger that raises an error if the `salary` inserted into the table is less than zero.
+
+```sql
+DELIMITER //
+CREATE TRIGGER before_insert_teacher
+BEFORE INSERT ON teachers
+FOR EACH ROW
+BEGIN
+    IF NEW.salary < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'salary cannot be negative';
+    END IF;
+END //
+DELIMITER ;
+```
+
+### Test
+
+```sql
+-- This should raise an error: "salary cannot be negative"
+INSERT INTO teachers (id, name, subject, experience, salary) VALUES (9, 'Alice', 'Math', 5, -5000.00);
+```
+
+**3. Create After Insert Trigger**
+
+Create an `after_insert_teacher` trigger that logs the insertion action to a `teacher_log` table.
+
+```sql
+CREATE TABLE teacher_log (
+    teacher_id INT,
+    action VARCHAR(50),
+    Actiontime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DELIMITER //
+CREATE TRIGGER after_insert_teacher
+AFTER INSERT ON teachers
+FOR EACH ROW
+BEGIN
+    INSERT INTO teacher_log (teacher_id, action)
+    VALUES (NEW.id, 'INSERT');
+END //
+DELIMITER ;
+```
+
+### Test
+
+```sql
+-- Insert a new teacher and check the log
+INSERT INTO teachers (id, name, subject, experience, salary) VALUES (9, 'Sneha', 'Math', 5, 15000.00);
+SELECT * FROM teachers;
+SELECT * FROM teacher_log;
+```
+
+**4. Create Before Delete Trigger**
+
+Create a `before_delete_experience_10` trigger that raises an error if you try to delete a row with experience greater than 10 years.
+
+```sql
+DELIMITER $$
+CREATE TRIGGER before_delete_experience_10
+BEFORE DELETE ON teachers
+FOR EACH ROW
+BEGIN
+    IF OLD.experience > 10 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot delete teacher who have experience more than 10 years';
+    END IF;
+END $$
+DELIMITER ;
+```
+
+### Test
+
+```sql
+-- This should raise an error: "Cannot delete teacher who have experience more than 10 years"
+DELETE FROM teachers WHERE id = 8;
+```
+
+**5. Create After Delete Trigger**
+
+Create an `after_delete_teacher` trigger that logs the deletion action to the `teacher_log` table.
+
+```sql
+DELIMITER ##
+CREATE TRIGGER delete_teacher_log
+AFTER DELETE ON teachers
+FOR EACH ROW
+BEGIN
+    INSERT INTO teacher_log (teacher_id, action)
+    VALUES (OLD.id, 'DELETE');
+END ##
+DELIMITER ;
+```
+
+### Test
+
+```sql
+-- Delete a teacher and check the log
+DELETE FROM teachers WHERE id = 9;
+SELECT * FROM teacher_log;
+```
+
 
 ## Conclusion
 
@@ -1001,7 +1140,7 @@ We've journeyed through the essentials of SQL, uncovering the fundamental comman
 
 Transitioning to Data Manipulation Language (DML) commands, we discovered how to insert new records, update existing data, and retrieve and delete information. These commands empower us to manage and manipulate the data within the tables defined by our DDL commands. By combining DDL, its constraints, and DML, we have a comprehensive toolkit for building and maintaining a robust and efficient database system.
 
-Further, we explored the practical use of joins and unions to combine data from multiple tables, enhancing our ability to perform complex queries. We demonstrated how to perform inner join, left join, and right join on the `Country` and `Persons` tables. We also listed all distinct and non-distinct country names from both tables and rounded the ratings of all persons to the nearest integer. Another section provides SQL queries and steps for various tasks related to subqueries and views.
+Further, we explored the practical use of joins and unions to combine data from multiple tables, enhancing our ability to perform complex queries. We demonstrated how to perform inner join, left join, and right join on the `Country` and `Persons` tables. We also listed all distinct and non-distinct country names from both tables and rounded the ratings of all persons to the nearest integer. Another section provides SQL queries and steps for various tasks related to subqueries and views. And triggers used for integrity and change tracking.
 
 In essence, this project provides a practical example of creating and managing a relational database with essential SQL operations. It offers valuable insights for anyone looking to build and maintain robust database systems, making it an essential resource for both beginners and seasoned practitioners.
 
