@@ -1046,7 +1046,7 @@ END //
 DELIMITER ;
 ```
 
-### Test
+**Test**
 
 ```sql
 -- This should raise an error: "salary cannot be negative"
@@ -1075,7 +1075,7 @@ END //
 DELIMITER ;
 ```
 
-### Test
+**Test**
 
 ```sql
 -- Insert a new teacher and check the log
@@ -1102,7 +1102,7 @@ END $$
 DELIMITER ;
 ```
 
-### Test
+**Test**
 
 ```sql
 -- This should raise an error: "Cannot delete teacher who have experience more than 10 years"
@@ -1125,7 +1125,7 @@ END ##
 DELIMITER ;
 ```
 
-### Test
+**Test**
 
 ```sql
 -- Delete a teacher and check the log
